@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const weatherform = document.querySelector(".weatherform");
 const cityInput = document.querySelector(".cityInput");
 const cards = document.querySelector(".cards");
@@ -13,7 +13,7 @@ weatherform.addEventListener("submit", async (event) => {
     } catch (error) {
       console.error(error);
       displayError(error.message);
-=======
+
 // Load environment variables from .env (optional when running locally)
 require("dotenv").config();
 
@@ -45,13 +45,13 @@ app.get("/weather", async (req, res) => {
 
     if (data.cod !== 200) {
       return res.status(data.cod).json({ error: data.message });
->>>>>>> 28dce4b (Fixed fetch URL to use OpenWeather API)
+
     }
   } else {
     displayError("Please enter a city");
   }
 });
-<<<<<<< HEAD
+
 
 async function getWeatherData(city) {
   const apiUrl = `https://frolicking-peony-f2233d.netlify.app/`;
@@ -126,7 +126,7 @@ function displayError(message) {
   cards.style.display = "flex";
   cards.appendChild(errorDisplay);
 }
-=======
+
 
 // Health check route
 app.get("/", (req, res) => {
@@ -137,4 +137,4 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`🌐 Server running at http://localhost:${PORT}`);
 });
->>>>>>> 28dce4b (Fixed fetch URL to use OpenWeather API)
+
