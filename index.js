@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const weatherform = document.querySelector(".weatherform");
 const cityInput = document.querySelector(".cityInput");
 const cards = document.querySelector(".cards");
@@ -12,11 +13,45 @@ weatherform.addEventListener("submit", async (event) => {
     } catch (error) {
       console.error(error);
       displayError(error.message);
+=======
+// Load environment variables from .env (optional when running locally)
+require("dotenv").config();
+
+const express = require("express");
+const fetch = require("node-fetch");
+const cors = require("cors");
+
+const app = express();
+const PORT = process.env.PORT || 3001; // Render uses dynamic port
+
+app.use(cors()); // Allow requests from any origin
+
+// Main route: Fetch weather by city
+app.get("/weather", async (req, res) => {
+  const city = req.query.city;
+  const apiKey = process.env.OPENWEATHER_API_KEY;
+
+  if (!city) return res.status(400).json({ error: "City is required" });
+
+  try {
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    console.log("🛰️ API URL:", apiUrl);
+
+    const response = await fetch(apiUrl);
+    const text = await response.text(); // Get raw response text for debugging
+    console.log("📦 Raw response:", text);
+
+    const data = JSON.parse(text);
+
+    if (data.cod !== 200) {
+      return res.status(data.cod).json({ error: data.message });
+>>>>>>> 28dce4b (Fixed fetch URL to use OpenWeather API)
     }
   } else {
     displayError("Please enter a city");
   }
 });
+<<<<<<< HEAD
 
 async function getWeatherData(city) {
   const apiUrl = `https://frolicking-peony-f2233d.netlify.app/`;
@@ -91,3 +126,15 @@ function displayError(message) {
   cards.style.display = "flex";
   cards.appendChild(errorDisplay);
 }
+=======
+
+// Health check route
+app.get("/", (req, res) => {
+  res.send("✅ Weather API is running! Use /weather?city=CityName");
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`🌐 Server running at http://localhost:${PORT}`);
+});
+>>>>>>> 28dce4b (Fixed fetch URL to use OpenWeather API)
